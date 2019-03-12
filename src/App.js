@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import SimpleStorage from "react-simple-storage";
+import { saveAs } from 'file-saver';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -44,6 +46,11 @@ class App extends Component {
 
     this.setState({ list: updatedList });
   }
+  saveFile(){
+    var FileSaver = require('file-saver');
+    var blob = new Blob([JSON.stringify(this.state.list)], {type: "application/json"});
+    FileSaver.saveAs(blob, "test.txt");
+  }
   render() {
     return (
       <div className="App">
@@ -84,7 +91,9 @@ class App extends Component {
                 </li>
               );
             })}
+            
           </ul>
+          <button onClick = {() => this.saveFile()}>Save File</button>
         </div>
       </div>
     );
