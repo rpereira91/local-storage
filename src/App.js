@@ -47,9 +47,8 @@ class App extends Component {
     this.setState({ list: updatedList });
   }
   saveFile(){
-    var FileSaver = require('file-saver');
     var blob = new Blob([JSON.stringify(this.state.list)], {type: "application/json"});
-    FileSaver.saveAs(blob, "test.txt");
+    saveAs(blob, "test.txt");
   }
   render() {
     return (
