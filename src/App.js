@@ -18,8 +18,9 @@ class App extends Component {
   addItem() {
     // create a new item with unique id
     const newItem = {
-      id: 1 + Math.random(),
-      value: this.state.newItem.slice()
+      id: new Date().getTime(),
+      value: this.state.newItem.slice(),
+      time: new Date().toDateString()
     };
 
     // copy current list of items
@@ -46,7 +47,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      
         <SimpleStorage parent={this} />
         <div
           style={{
@@ -71,10 +71,12 @@ class App extends Component {
             &#43; Add
           </button>
           <br /> <br />
+          {}
           <ul>
             {this.state.list.map(item => {
               return (
                 <li key={item.id}>
+                  {item.time}
                   {item.value}
                   <button onClick={() => this.deleteItem(item.id)}>
                     Remove
