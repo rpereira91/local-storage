@@ -48,7 +48,9 @@ class App extends Component {
   }
   saveFile(){
     var blob = new Blob([JSON.stringify(this.state.list)], {type: "application/json"});
-    saveAs(blob, "test.txt");
+    var filename = new Date().toDateString() + "_" + new Date().toTimeString() + ".txt"
+    saveAs(blob, filename);
+    {this.state.list.map(item =>this.deleteItem(item.id))}
   }
   render() {
     return (
@@ -77,7 +79,6 @@ class App extends Component {
             &#43; Add
           </button>
           <br /> <br />
-          {}
           <ul>
             {this.state.list.map(item => {
               return (
@@ -93,6 +94,13 @@ class App extends Component {
             
           </ul>
           <button onClick = {() => this.saveFile()}>Save File</button>
+          {new Intl.DateTimeFormat('en-GB', { 
+          year: 'numeric', 
+          month: '2-digit', 
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit'
+        }).format(new Date())}
         </div>
       </div>
     );
