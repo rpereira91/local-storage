@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import SimpleStorage from "react-simple-storage";
 import { saveAs } from 'file-saver';
-import DisplayTasks from './components/tasks';
 
 class App extends Component {
   constructor(props) {
@@ -95,21 +94,28 @@ class App extends Component {
           </button>
           <br /> <br />
           {this.state.list.length ? "List of things":"No items in you list yet"}
-
-            {this.state.list.map((item) =>
-              // return (
-              //   <li key={item.id}>
-              //     {item.time} : 
-              //     {item.value}
-              //     <button onClick={() => this.deleteItem(item.id)}>
-              //       Remove
-              //     </button>
-              //   </li>
-              // );
-              <div>
-              <DisplayTasks current_task = {item} />
-              </div>
+            <table>
+            {this.state.list.map((item) =>{
+              return (
+                <tr key={item.id}>
+                  <td>
+                    {item.time} 
+                  </td>
+                  <td>
+                    {item.value}
+                  </td>
+                  <td>
+                    <button onClick={() => this.deleteItem(item.id)}>
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              );
+            }
             )}
+
+
+            </table>
             
           <button onClick = {() => this.saveFile()}>Save File</button>
           {}
