@@ -27,3 +27,7 @@ This webpage is designed to run without any kind of web server since it's a stat
 [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 
 [React Simple Storage Package](https://github.com/ryanjyost/react-simple-storage)
+
+#### ToDo
+- Add More Fields
+- Edit CSS a bit

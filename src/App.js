@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import SimpleStorage from "react-simple-storage";
 import { saveAs } from 'file-saver';
+import DisplayTasks from './components/tasks';
 
 class App extends Component {
   constructor(props) {
@@ -19,10 +20,14 @@ class App extends Component {
 
   addItem() {
     // create a new item with unique id
+    var current_time = new Intl.DateTimeFormat('en-GB', {
+      hour: 'numeric',
+      minute: '2-digit'
+    }).format(new Date())
     const newItem = {
       id: new Date().getTime(),
       value: this.state.newItem.slice(),
-      time: new Date().toDateString()
+      time: current_time
     };
 
     // copy current list of items
@@ -71,7 +76,10 @@ class App extends Component {
             margin: "auto"
           }}
         >
+        <h2>ToDo List: </h2>
+        <h3>
           Add an item to the list
+        </h3>
           <br />
           <input
             type="text"
@@ -86,20 +94,23 @@ class App extends Component {
             &#43; Add
           </button>
           <br /> <br />
-          <ul>
-            {this.state.list.map(item => {
-              return (
-                <li key={item.id}>
-                  {item.time}
-                  {item.value}
-                  <button onClick={() => this.deleteItem(item.id)}>
-                    Remove
-                  </button>
-                </li>
-              );
-            })}
+          {this.state.list.length ? "List of things":"No items in you list yet"}
+
+            {this.state.list.map((item) =>
+              // return (
+              //   <li key={item.id}>
+              //     {item.time} : 
+              //     {item.value}
+              //     <button onClick={() => this.deleteItem(item.id)}>
+              //       Remove
+              //     </button>
+              //   </li>
+              // );
+              <div>
+              <DisplayTasks current_task = {item} />
+              </div>
+            )}
             
-          </ul>
           <button onClick = {() => this.saveFile()}>Save File</button>
           {}
         </div>
